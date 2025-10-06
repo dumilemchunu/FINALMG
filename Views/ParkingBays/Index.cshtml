@@ -1,0 +1,34 @@
+﻿@model IEnumerable<TruckScheduler.Models.ParkingBay>
+@using TruckScheduler.Models
+@{
+    ViewData["Title"] = "Parking Bays";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Parking Bays</h2>
+    <a class="btn btn-success" href="/ParkingBays/Create">Add Bay</a>
+</div>
+
+<table class="table">
+    <thead><tr><th>Bay</th><th>Allowed Cargo</th><th>Notes</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var b in Model)
+        {
+            string cssClass = b.AllowedCargoType switch
+            {
+                CargoType.Hazardous => "cargo-hazardous",
+                CargoType.Refrigerated => "cargo-refrigerated",
+                CargoType.Perishable => "cargo-perishable",
+                CargoType.Fragile => "cargo-fragile",
+                CargoType.Oversized => "cargo-oversized",
+                _ => "cargo-general"
+            };
+            <tr>
+                <td>@b.BayNumber</td>
+                <td><span class="badge badge-cargo @cssClass">@b.AllowedCargoType</span></td>
+                <td>@b.Notes</td>
+                <td><a class="btn btn-sm btn-primary" href="/ParkingBays/Edit/@b.Id">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

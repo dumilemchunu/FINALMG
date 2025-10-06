@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    var model = Model;
+}
+<h1>Dashboard</h1>
+
+<div class="row gy-3">
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Trucks</h5>
+                <p class="display-6">@((int)model.TotalTrucks)</p>
+                <a class="btn btn-sm btn-primary" href="/Trucks">Manage trucks</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Drivers</h5>
+                <p class="display-6">@((int)model.TotalDrivers)</p>
+                <a class="btn btn-sm btn-primary" href="/Drivers">Manage drivers</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Parking bays</h5>
+                <p class="display-6">@((int)model.TotalBays)</p>
+                <p class="text-muted">Occupied: @((int)model.OccupiedBays)</p>
+                <a class="btn btn-sm btn-primary" href="/ParkingBays">View bays</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h3>Active Check-ins</h3>
+@if (((IEnumerable<dynamic>)model.ActiveCheckIns).Any())
+{
+    <table class="table table-striped">
+        <thead><tr><th>Truck</th><th>Bay</th><th>Cargo</th><th>Check-in (UTC)</th></tr></thead>
+        <tbody>
+            @foreach (var c in model.ActiveCheckIns)
+            {
+                <tr>
+                    <td>@c.Truck.LicensePlate</td>
+                    <td>@(c.ParkingBay != null ? c.ParkingBay.BayNumber : "—")</td>
+                    <td>@c.CargoType - @c.CargoDescription</td>
+                    <td>@c.CheckInTime.ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No active check-ins right now.</p>
+}

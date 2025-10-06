@@ -1,0 +1,51 @@
+﻿@using TruckScheduler.Models
+@{
+    ViewData["Title"] = "Check-in Truck";
+    var trucks = ViewBag.Trucks as List<TruckScheduler.Models.Truck>;
+    var drivers = ViewBag.Drivers as List<TruckScheduler.Models.Driver>;
+    var cargoTypes = ViewBag.CargoTypes as List<CargoType>;
+}
+<h2>Check-in Truck</h2>
+
+<form method="post" asp-action="Create">
+    <div class="mb-3">
+        <label class="form-label">Truck</label>
+        <select name="truckId" class="form-select" required>
+            <option value="">-- select truck --</option>
+            @foreach (var t in trucks)
+            {
+                <option value="@t.Id">@t.LicensePlate @(!string.IsNullOrEmpty(t.Model) ? $"({t.Model})" : "")</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Driver (optional)</label>
+        <select name="driverId" class="form-select">
+            <option value="">-- none --</option>
+            @foreach (var d in drivers)
+            {
+                <option value="@d.Id">@d.FullName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cargo Type</label>
+        <select name="cargoType" class="form-select" required>
+            @foreach (var ct in cargoTypes)
+            {
+                <option value="@( (int)ct )">@ct</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cargo description / contents</label>
+        <input name="cargoDescription" class="form-control" />
+        <div class="form-text">E.g.: "Fresh strawberries", "Electronics", "Gas cylinders".</div>
+    </div>
+
+    <button class="btn btn-primary">Check-in</button>
+    <a class="btn btn-secondary" href="/CheckIns">Cancel</a>
+</form>

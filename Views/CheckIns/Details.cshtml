@@ -1,0 +1,18 @@
+﻿@model TruckScheduler.Models.CheckIn
+@{
+    ViewData["Title"] = "Check-in Details";
+}
+<h2>Check-in Details</h2>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Truck:</strong> @Model.Truck.LicensePlate</p>
+        <p><strong>Driver:</strong> @(Model.Driver != null ? Model.Driver.FullName : "-")</p>
+        <p><strong>Bay:</strong> @(Model.ParkingBay != null ? Model.ParkingBay.BayNumber : "Not assigned")</p>
+        <p><strong>Cargo:</strong> @Model.CargoType - @Model.CargoDescription</p>
+        <p><strong>Check-in (UTC):</strong> @Model.CheckInTime.ToString("yyyy-MM-dd HH:mm")</p>
+        <p><strong>Check-out (UTC):</strong> @(Model.CheckOutTime?.ToString("yyyy-MM-dd HH:mm") ?? "-")</p>
+    </div>
+</div>
+
+<a class="btn btn-secondary mt-3" href="/CheckIns">Back</a>

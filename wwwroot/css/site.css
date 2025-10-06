@@ -1,0 +1,48 @@
+body {
+    background: linear-gradient(180deg,#f8fbff 0%, #ffffff 100%);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.card-header {
+    background: linear-gradient(90deg,#0d6efd55,#6610f255);
+    color: #fff;
+}
+
+.badge-cargo {
+    font-weight: 600;
+    padding: 0.45rem 0.6rem;
+}
+
+.cargo-hazardous {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+.cargo-refrigerated {
+    background: #5bc0de;
+    color: #fff;
+}
+
+.cargo-perishable {
+    background: #ffb84d;
+    color: #fff;
+}
+
+.cargo-fragile {
+    background: #9b59b6;
+    color: #fff;
+}
+
+.cargo-oversized {
+    background: #6c757d;
+    color: #fff;
+}
+
+.cargo-general {
+    background: #198754;
+    color: #fff;
+}
+
+.table thead th {
+    background: #e9f0ff;
+}

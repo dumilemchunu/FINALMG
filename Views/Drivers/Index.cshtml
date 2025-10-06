@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TruckScheduler.Models.Driver>
+@{
+    ViewData["Title"] = "Drivers";
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Drivers</h2>
+    <a class="btn btn-success" href="/Drivers/Create">Add Driver</a>
+</div>
+
+<table class="table">
+    <thead><tr><th>Name</th><th>License</th><th>Phone</th><th>Email</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>@d.FullName</td>
+                <td>@d.LicenseNumber</td>
+                <td>@d.Phone</td>
+                <td>@d.Email</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="/Drivers/Edit/@d.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger" href="/Drivers/Delete/@d.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

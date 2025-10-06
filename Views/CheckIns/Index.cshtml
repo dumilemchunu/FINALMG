@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TruckScheduler.Models.CheckIn>
+@{
+    ViewData["Title"] = "Active Check-ins";
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Active Check-ins</h2>
+    <a class="btn btn-success" href="/CheckIns/Create">Check-in Truck</a>
+    <a class="btn btn-secondary ms-2" href="/CheckIns/History">History</a>
+</div>
+
+<table class="table">
+    <thead><tr><th>Truck</th><th>Driver</th><th>Bay</th><th>Cargo</th><th>Check-in</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Truck.LicensePlate</td>
+                <td>@(c.Driver != null ? c.Driver.FullName : "-")</td>
+                <td>@(c.ParkingBay != null ? c.ParkingBay.BayNumber : "-")</td>
+                <td>@c.CargoType - @c.CargoDescription</td>
+                <td>@c.CheckInTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <form asp-action="CheckOut" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="@c.Id" />
+                        <button class="btn btn-sm btn-danger" type="submit">Check-out</button>
+                    </form>
+                    <a class="btn btn-sm btn-info" href="/CheckIns/Details/@c.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
